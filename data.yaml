@@ -1,4 +1,4 @@
-path: model3
+path: setv2
 train: train/images
 val: val/images
 nc: 1

@@ -1,37 +1,39 @@
 import cv2
-import os
 from ultralytics import YOLO
 
-# Modell laden
-model = YOLO("radcog-0.1.4.pt")  # Du kannst auch yolov5m.pt, yolov5l.pt oder yolov5x.pt ausprobieren
+# Load your trained model
+model = YOLO('radcog-0.1.4.pt')  # Replace 'best.pt' with your model file
 
-# Load all files from input dir
-for image_path in os.listdir("input"):
+# Open a video file or capture device (0 for webcam)
+video_path = 'input/vid_out.webm'  # Replace with your video file or use 0 for webcam
+cap = cv2.VideoCapture(video_path)
 
-    image_path = "input/" + image_path
-    image = cv2.imread(image_path)
+# Check if the video was opened successfully
+if not cap.isOpened():
+    print("Error: Could not open video.")
+    exit()
 
-    # Objekterkennung durchführen
-    results = model(image_path, conf=0.05)
+# Process the video frame by frame
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("End of video or error reading frame.")
+        break
 
+    # Run YOLO inference on the frame
+    results = model.predict(source=frame, conf=0.25, device=0, verbose=False)  # Adjust confidence as needed
 
+    # Visualize detections on the frame
+    annotated_frame = results[0].plot()  # Annotate the frame with detections
 
-    # Ergebnisse verarbeiten und anzeigen
-    # for result in results:
-    #for box in results[0].boxes:
-    if(len(results[0].boxes) > 0):
-        box = results[0].boxes[0]
-        x1, y1, x2, y2 = box.xyxy[0]  # Koordinaten der Box
-        conf = box.conf[0]           # Vertrauen
-        cls = box.cls[0]             # Klassen-ID
+    # Display the frame
+    cv2.imshow("YOLOv8 Live Detection", annotated_frame)
 
-        print(f"Gefunden: {label} mit {conf:.3f} Konfidenz")
+    # Press 'q' to exit the loop
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
-        # Zeichne die Box auf das Bild
-        cv2.rectangle(image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
-        cv2.putText(image, f"{label} {conf:.3f}", (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+# Release resources
+cap.release()
+cv2.destroyAllWindows()
 
-    # Bild anzeigen
-    cv2.imshow("Ergebnisse", image)
-    cv2.waitKey(0)
-    # cv2.destroyAllWindows()

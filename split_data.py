@@ -3,9 +3,9 @@ import shutil
 import random
 
 # Paths
-images_dir = '/home/mrmine/prg/radcog/model2/images/'  # Directory containing all images
-labels_dir = '/home/mrmine/prg/radcog/model2/labels/'  # Directory containing all labels
-output_dir = '/home/mrmine/prg/radcog/model3'  # Directory where train/val subdirectories will be created
+images_dir = '/home/mrmine/prg/radcog/datasets/setv2p/images/'  # Directory containing all images
+labels_dir = '/home/mrmine/prg/radcog/datasets/setv2p/labels/'  # Directory containing all labels
+output_dir = '/home/mrmine/prg/radcog/datasets/setv2'  # Directory where train/val subdirectories will be created
 train_split = 0.8  # 80% for training
 
 # Ensure output subdirectories exist

@@ -1,1 +1,0 @@
-yay -S python-gitpython python-matplotlib python-numpy python-opencv python-pillow python-psutil python-yaml python-requests python-scipy python-thop python-torchvision-cuda python-pytorch-cuda python-tqdm python-ultralytics
