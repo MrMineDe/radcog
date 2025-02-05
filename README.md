@@ -39,6 +39,6 @@ These Packagenames are for arch-linux(some AUR), but should be similar for other
 - use main2.py -> detect a video (adjust video_path)
 
 ## Models
-Model | mAP50 | mAP50-95 | Number of Images |
-radcog-0.1.4 | ~0.5 | ~0.2 | ~5000
-radcog-0.2.X | ? | ? | ~8000
+Model | box_loss | cls_loss | dfl_loss | mAP50 | mAP50-95 | Number of Images |
+radcog-0.1.4 | ? | ? | ? |~0.5 | ~0.2 | ~5000
+radcog-0.2.1 | 1.583 | 1.334 | 0.9287 | 0.617 | 0.345 | ~8000
