@@ -39,8 +39,9 @@ These Packagenames are for arch-linux(some AUR), but should be similar for other
 - use main2.py -> detect a video (adjust video_path)
 
 ## Models
-Model | Base | imgsz | box_loss | cls_loss | dfl_loss | mAP50 | mAP50-95 | Images |
-|-----|------|-------|----------|----------|----------|-------|----------|--------|
-radcog-0.1.4 | yolo8l  | 512  | ?     | ?     | ?      |~0.5   | ~0.2  | ~5000
-radcog-0.2.1 | yolo11s | 512  | 1.583 | 1.334 | 0.9287 | 0.617 | 0.345 | ~8000
-radcog-0.2.2 | yolo11s | 1028 | ?     | ?     | ?      | ?     | ?     | ~8000
+Model | Base | imgsz | box_loss | cls_loss | dfl_loss | mAP50 | mAP50-95 | Images | Description |
+|-----|------|-------|----------|----------|----------|-------|----------|--------|-------------|
+radcog-0.1.4 | yolo8l       | 512  | ?     | ?     | ?      |~0.5   | ~0.2  | ~5000 | First try with bad annotations (red balls)
+radcog-0.2.1 | yolo11s      | 512  | 1.583 | 1.334 | 0.9287 | 0.617 | 0.345 | ~8000 | Second try with 2600 high quality black balls and images from radcog-0.1
+radcog-0.2.2 | yolo11s      | 1028 | 1.449 | 1.576 | 1.245  | 0.657 | 0.414 | ~8000 | Upping quality with higher res and other small adjustments
+radcog-0.2.3 | radcog-0.2.2 | 1028 | ? | ? | ? | ? | ? | ~8000 | more epoch waiting, as 0.2.2 doesnt seemed finished with patience=5
