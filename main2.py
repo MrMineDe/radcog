@@ -3,7 +3,7 @@ import cv2
 from ultralytics import YOLO
 
 # Load your trained model
-model = YOLO('models/radcog-0.2.1.pt')  # Replace 'best.pt' with your model file
+model = YOLO('models/radcog-0.5.1.pt')  # Replace 'best.pt' with your model file
 
 # Open a video file or capture device (0 for webcam)
 video_path = 'input/input4--2.mp4'  # Replace with your video file or use 0 for webcam
@@ -15,7 +15,7 @@ if not cap.isOpened():
     exit()
 
 # Get the fps of the video
-fps = cap.get(cv2.CAP_PROP_FPS) / 4
+fps = cap.get(cv2.CAP_PROP_FPS)
 frame_delay = int(1000 / fps)
 
 # Process the video frame by frame
@@ -28,7 +28,7 @@ while True:
         break
 
     # Run YOLO inference on the frame
-    results = model.predict(source=frame, conf=0.05, device=0, verbose=False)  # Adjust confidence as needed
+    results = model.predict(source=frame, conf=0.2, device=0, verbose=False)  # Adjust confidence as needed
 
     # Visualize detections on the frame
     annotated_frame = results[0].plot()  # Annotate the frame with detections
