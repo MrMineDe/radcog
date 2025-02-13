@@ -2,8 +2,8 @@ import cv2
 import os
 
 # Paths to your images and labels
-IMAGE_DIR = "datasets/setv5p/images/"  # Change to your image folder
-LABEL_DIR = "datasets/setv5p/labels/"  # Change to your YOLO labels folder
+IMAGE_DIR = "datasets/setv7p/images/"  # Change to your image folder
+LABEL_DIR = "datasets/setv7p/labels/"  # Change to your YOLO labels folder
 CLASS_NAMES = ["Ball"]  # Modify this if you have multiple classes
 
 # Load all images
