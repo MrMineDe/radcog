@@ -46,13 +46,146 @@ curl -X GET "http://localhost:8080/api/projects/{project_id}/export?ids[]={task_
 - use main2.py -> detect a video (adjust video_path)
 
 ## Models
-Model | Base | imgsz | box_loss | cls_loss | dfl_loss | Box(P | R |mAP50 | mAP50-95 | Images | Description |
-|-----|------|-------|----------|----------|----------|-------|---|------|----------|--------|-------------------------------|
-radcog-0.1.4 | yolo8l       | 512  | ?     | ?     | ?      | ? | ? |~0.5   | ~0.2  | ~5000 | First try with bad annotations (red balls)
-radcog-0.2.1 | yolo11s      | 512  | 1.583 | 1.334 | 0.9287 | ? | ? | 0.617 | 0.345 | ~8000 | Second try with 2600 high quality black balls and images from radcog-0.1
-radcog-0.2.2 | yolo11s      | 1028 | 1.449 | 1.576 | 1.245  | ? | ? | 0.657 | 0.414 | ~8000 | Upping quality with higher res and other small adjustments
-radcog-0.2.3 | radcog-0.2.2 | 1028 | 1.415 | 1.346 | 1.174  | ? | ? | 0.68  | 0.426 | ~8000 | more epoch waiting, as 0.2.2 doesnt seemed finished with patience=5
-radcog-0.3.1 | yolo11s | 1028 | ? | ? | ? | ? | ? | ? | ? | 2620 | only use perfect black ball annotations
-radcog-0.4.2 | yolo11s | 1028 | 1.506 | 1.307 | 1.054 | 0.851 | 0.697 | 0.825 | 0.511 | 22900 | use 1.0 augmentations (x8) on the 2620 pictures and spin down the low learning rate etc. from 0.3. Not finished training but stopped after realising the training data was bad. Does not recognise black balls at all, despite "good" values
-radcog-0.5.1 | yolo11s | 1028 | 1.882 | 1.212 | 0.9744 | 1 | 0.787 | 0.892 | 0.448 | 120 | realized all conversions were completely wrong making most of the annotated pictured bad. Fixed the conversion and reannotated around ~100 pictures for a first try (no augmentations). Instantly better than every model so far
-radcog-0.5.3 | yolo11s | 1028 | 1.544 | 0.8294 | 1.026 | 0.918 | 0.777 | 0.856 | 0.462 | ~1000 | use radcog-0.5.1 data with more conservative augmentations (x8) than in 0.4.2
+<table border="1">
+    <tr>
+        <th>Model</th>
+        <th>Base</th>
+        <th>imgsz</th>
+        <th>box_loss</th>
+        <th>cls_loss</th>
+        <th>dfl_loss</th>
+        <th>Box(P)</th>
+        <th>R</th>
+        <th>mAP50</th>
+        <th>mAP50-95</th>
+        <th>Images</th>
+    </tr>
+    <tr>
+        <td colspan="11"><strong>First try with bad annotations (red balls)</strong></td>
+    </tr>
+    <tr>
+        <td>radcog-0.1.4</td>
+        <td>yolo8l</td>
+        <td>512</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>~0.5</td>
+        <td>~0.2</td>
+        <td>~5000</td>
+    </tr>
+    <tr>
+        <td colspan="11"><strong>Second try with 2600 high quality black balls and images from radcog-0.1</strong></td>
+    </tr>
+    <tr>
+        <td>radcog-0.2.1</td>
+        <td>yolo11s</td>
+        <td>512</td>
+        <td>1.583</td>
+        <td>1.334</td>
+        <td>0.9287</td>
+        <td>?</td>
+        <td>?</td>
+        <td>0.617</td>
+        <td>0.345</td>
+        <td>~8000</td>
+    </tr>
+    <tr>
+        <td colspan="11"><strong>Upping quality with higher res and other small adjustments</strong></td>
+    </tr>
+    <tr>
+        <td>radcog-0.2.2</td>
+        <td>yolo11s</td>
+        <td>1028</td>
+        <td>1.449</td>
+        <td>1.576</td>
+        <td>1.245</td>
+        <td>?</td>
+        <td>?</td>
+        <td>0.657</td>
+        <td>0.414</td>
+        <td>~8000</td>
+    </tr>
+    <tr>
+        <td colspan="11"><strong>More epoch waiting, as 0.2.2 doesn’t seem finished with patience=5</strong></td>
+    </tr>
+    <tr>
+        <td>radcog-0.2.3</td>
+        <td>radcog-0.2.2</td>
+        <td>1028</td>
+        <td>1.415</td>
+        <td>1.346</td>
+        <td>1.174</td>
+        <td>?</td>
+        <td>?</td>
+        <td>0.68</td>
+        <td>0.426</td>
+        <td>~8000</td>
+    </tr>
+    <tr>
+        <td colspan="11"><strong>Only use perfect black ball annotations</strong></td>
+    </tr>
+    <tr>
+        <td>radcog-0.3.1</td>
+        <td>yolo11s</td>
+        <td>1028</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>2620</td>
+    </tr>
+    <tr>
+        <td colspan="11"><strong>Use 1.0 augmentations (x8) on the 2620 pictures and spin down the low learning rate etc. from 0.3. Not finished training but stopped after realizing the training data was bad. Does not recognize black balls at all, despite "good" values.</strong></td>
+    </tr>
+    <tr>
+        <td>radcog-0.4.2</td>
+        <td>yolo11s</td>
+        <td>1028</td>
+        <td>1.506</td>
+        <td>1.307</td>
+        <td>1.054</td>
+        <td>0.851</td>
+        <td>0.697</td>
+        <td>0.825</td>
+        <td>0.511</td>
+        <td>22900</td>
+    </tr>
+    <tr>
+        <td colspan="11"><strong>Realized all conversions were completely wrong, making most of the annotated pictures bad. Fixed the conversion and reannotated around ~100 pictures for a first try (no augmentations). Instantly better than every model so far.</strong></td>
+    </tr>
+    <tr>
+        <td>radcog-0.5.1</td>
+        <td>yolo11s</td>
+        <td>1028</td>
+        <td>1.882</td>
+        <td>1.212</td>
+        <td>0.9744</td>
+        <td>1</td>
+        <td>0.787</td>
+        <td>0.892</td>
+        <td>0.448</td>
+        <td>120</td>
+    </tr>
+    <tr>
+        <td colspan="11"><strong>Use radcog-0.5.1 data with more conservative augmentations (x8) than in 0.4.2.</strong></td>
+    </tr>
+    <tr>
+        <td>radcog-0.5.3</td>
+        <td>yolo11s</td>
+        <td>1028</td>
+        <td>1.544</td>
+        <td>0.8294</td>
+        <td>1.026</td>
+        <td>0.918</td>
+        <td>0.777</td>
+        <td>0.856</td>
+        <td>0.462</td>
+        <td>~1000</td>
+    </tr>
+</table>
