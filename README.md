@@ -19,7 +19,9 @@ These Packagenames are for arch-linux(some AUR), but should be similar for other
 - python-torchvision-cuda
 - python-pytorch-cuda
 - python-tqdm
-- typhon-ultralytics
+- python-ultralytics
+- python-lap
+- python-opencv
 
 # Usage
 ## Label Data
@@ -56,3 +58,5 @@ radcog-0.3.1 | yolo11s | 1028 | ? | ? | ? | ? | ? | ? | ? | 2620 | only use perf
 radcog-0.4.2 | yolo11s | 1028 | 1.506 | 1.307 | 1.054 | 0.851 | 0.697 | 0.825 | 0.511 | 22900 | use 1.0 augmentations (x8) on the 2620 pictures and spin down the low learning rate etc. from 0.3. Not finished training but stopped after realising the training data was bad. Does not recognise black balls at all, despite "good" values
 radcog-0.5.1 | yolo11s | 1028 | 1.882 | 1.212 | 0.9744 | 1 | 0.787 | 0.892 | 0.448 | 120 | realized all conversions were completely wrong making most of the annotated pictured bad. Fixed the conversion and reannotated around ~100 pictures for a first try (no augmentations). Instantly better than every model so far
 radcog-0.5.3 | yolo11s | 1028 | 1.544 | 0.8294 | 1.026 | 0.918 | 0.777 | 0.856 | 0.462 | ~1000 | use radcog-0.5.1 data with more conservative augmentations (x8) than in 0.4.2
+radcog-0.5.4 | yolo11s | 1028 | ? | ? | ? | ? | ? | ? | ? | 454 | more annotation data than 0.5.1, no augmentations
+radcog-0.5.5 | yolo11s | 1028 | 0.7568 | 0.5142 | 0.8323 | 0.994 | 0.926 | 0.981 | 0.826 | 2025 | more annotations than 0.5.4, no augmentations

@@ -2,8 +2,8 @@ import cv2
 import os
 
 # Paths to your images and labels
-IMAGE_DIR = "datasets/setv7p/images/"  # Change to your image folder
-LABEL_DIR = "datasets/setv7p/labels/"  # Change to your YOLO labels folder
+IMAGE_DIR = "datasets/setv10p/images/"  # Change to your image folder
+LABEL_DIR = "datasets/setv10p/labels/"  # Change to your YOLO labels folder
 CLASS_NAMES = ["Ball"]  # Modify this if you have multiple classes
 
 # Load all images
@@ -37,7 +37,7 @@ def draw_yolo_bboxes(image_path, label_path):
                 color = (0, 255, 0)  # Green box
                 label = CLASS_NAMES[int(class_id)] if int(class_id) < len(CLASS_NAMES) else f"Class {class_id}"
 
-                cv2.rectangle(image, (x1, y1), (x2, y2), color, 2)
+                cv2.rectangle(image, (x1, y1), (x2, y2), color, 1)
                 cv2.putText(image, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
 
     return image

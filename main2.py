@@ -3,7 +3,7 @@ import cv2
 from ultralytics import YOLO
 
 # Load your trained model
-model = YOLO('models/radcog-0.5.1.pt')  # Replace 'best.pt' with your model file
+model = YOLO('models/radcog-0.5.5.pt')  # Replace 'best.pt' with your model file
 
 # Open a video file or capture device (0 for webcam)
 video_path = 'input/input4--2.mp4'  # Replace with your video file or use 0 for webcam
@@ -28,7 +28,7 @@ while True:
         break
 
     # Run YOLO inference on the frame
-    results = model.predict(source=frame, conf=0.2, device=0, verbose=False)  # Adjust confidence as needed
+    results = model.predict(source=frame, conf=0.25, device=0, verbose=False)  # Adjust confidence as needed
 
     # Visualize detections on the frame
     annotated_frame = results[0].plot()  # Annotate the frame with detections
